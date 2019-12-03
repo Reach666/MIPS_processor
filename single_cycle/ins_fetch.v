@@ -1,7 +1,7 @@
 module ins_fetch(Instruction,zero,Branch,Jump,clk,reset);
 
 input clk,reset,zero,Branch,Jump;
-output Instruction;
+output[31:0] Instruction;
 
 reg [31:0] PC;
 wire [15:0]imm16;
@@ -13,9 +13,9 @@ wire [31:0]Instruction;
 //	PC = 0;
 //end
 
-adder 	   u0(PC4,PC[31:2],30'b01);
+adder_30   u0(PC4,PC[31:2],30'b01);
 sign_ext30 u2(ext_imm30,imm16);
-adder      u1(PC_branch,ext_imm30,PC4);
+adder_30   u1(PC_branch,ext_imm30,PC4);
 mux_2x1 #(.DATA_WIDTH(30)
          )mux_2x1_u0(.in1(PC_branch	   ), 
                      .in0(PC4	           ), 
@@ -23,8 +23,8 @@ mux_2x1 #(.DATA_WIDTH(30)
                      .out(PC_4_or_beq	   )
                     );
 mux_2x1 #(.DATA_WIDTH(30)
-         )mux_2x1_u1(.in1(PC_4_or_beq	   ), 
-                     .in0(PC_jump	   ), 
+         )mux_2x1_u1(.in1(PC_jump	   ), 
+                     .in0(PC_4_or_beq	   ), 
                      .sel(Jump	       	   ), 
                      .out(next_addr	   )
                     );
@@ -38,10 +38,10 @@ begin
 		PC=0;
 	end
 	else begin
-	PC = next_addr;
+		PC = {next_addr,2'b00};
 	end
 end
 
-memorys Ins_Mem(32'b0,0,PC,Instruction,clk);//memorys(DataIn,WrEn,Adr,DataOut,Clk);
+memorys Ins_Mem(32'b0,1'b0,{2'b00,PC[31:2]},Instruction,clk);//memorys(DataIn,WrEn,Adr,DataOut,Clk);
 
 endmodule

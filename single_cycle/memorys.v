@@ -5,7 +5,7 @@ module memorys(DataIn,WrEn,Adr,DataOut,Clk);
   input Clk;
   output [31:0]DataOut;
 
-  reg [31:0]data[31:0];
+  reg [31:0]data[127:0];
   wire [31:0]DataOut;
   
   always@(negedge Clk)

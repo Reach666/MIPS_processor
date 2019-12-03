@@ -5,6 +5,7 @@ output ext_imm30;
 
 wire [29:0]ext_imm;
 wire [15:0]imm16;
+wire [29:0]ext_imm30;
 
 assign ext_imm30 = {{14{imm16[15]}},imm16};
 
