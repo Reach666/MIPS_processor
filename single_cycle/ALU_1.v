@@ -26,7 +26,12 @@ case(ALUctr)
 		if(busC == 0)
 		zero = 1;
 		end
-	//myLESS:busC =  
+	myLESS: begin
+		if(busA<busB)
+			busC = 1;
+		else
+			busC = 0;
+		end
 endcase 
 end
 

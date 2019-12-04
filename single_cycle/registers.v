@@ -7,8 +7,8 @@ module registers(busA,busB,busW,Ra,Rb,Rw,RegWr,Clk);
   reg [31:0]data[31:0];
   wire[31:0] busA,busB;
   
-  assign busA = data[Ra];
-  assign busB = data[Rb];
+  assign busA = (Ra==5'b0)? 32'b0:data[Ra];
+  assign busB = (Rb==5'b0)? 32'b0:data[Rb];
   always@(negedge Clk)
   begin
     if(RegWr)

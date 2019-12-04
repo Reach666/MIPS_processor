@@ -10,7 +10,8 @@ assign RegWr=(!op[5]&!op[4]&!op[3]&!op[2]&!op[1]&!op[0])
 		| (!op[5]&!op[4]&op[3]&!op[2]&!op[1]&!op[0]);//R-type ori lw addi
 assign RegDst=!op[5]&!op[4]&!op[3]&!op[2]&!op[1]&!op[0];//R-type
 assign ExtOp=(op[5]&!op[4]&!op[3]&!op[2]&op[1]&op[0])
-		| (op[5]&!op[4]&op[3]&!op[2]&op[1]&op[0]);//lw sw
+		| (op[5]&!op[4]&op[3]&!op[2]&op[1]&op[0])
+		| (!op[5]&!op[4]&op[3]&!op[2]&!op[1]&!op[0]);//lw sw addi
 assign AluSrc=(!op[5]&!op[4]&op[3]&op[2]&!op[1]&op[0])
 		| (op[5]&!op[4]&!op[3]&!op[2]&op[1]&op[0])
 		| (op[5]&!op[4]&op[3]&!op[2]&op[1]&op[0])

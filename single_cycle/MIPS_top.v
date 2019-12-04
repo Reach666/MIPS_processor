@@ -8,8 +8,8 @@ wire[2:0] ALUctr,ALUop;
 
 ins_fetch ins_fetch(Instruction,zero,Branch,Jump,clk,reset);
 assign op=Instruction[31:26];
-assign Rt=Instruction[25:21];
-assign Rs=Instruction[20:16];
+assign Rs=Instruction[25:21];
+assign Rt=Instruction[20:16];
 assign Rd=Instruction[15:11];
 assign imm16=Instruction[15:0];
 assign func=Instruction[5:0];
