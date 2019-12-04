@@ -1,4 +1,5 @@
 # MIPS_processor
+A MIPS_processor in Verilog.
 Course assignments.
 We only implement some simple instrutions,such as add,stl,addi,ori,beq,jump.
 
