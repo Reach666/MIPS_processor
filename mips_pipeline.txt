@@ -1,0 +1,54 @@
+addi $s0,$zero,0				;$s0=&iden[0][0]
+addi $s1,$zero,1				;$s1=&iden[0][1]
+addi $s2,$zero,2				;$s2=&iden[0][2]
+addi $s3,$zero,3				;$s3=&iden[0][3]
+
+addi $s4,$zero,0				;reset $s4,assign j=0
+ForLoop:		
+addi $t0,$zero,3
+beq $s4,$t0,Exit				;j=3, goto Exit
+add $zero,$zero,$zero
+add $zero,$zero,$zero
+add $zero,$zero,$zero
+
+add $t4,$s4,$s4
+add $t4,$t4,$t4				;j multiple 4
+
+addi $s0,$zero,0				;reset $s0,assign i=0
+forloop:	
+addi $t0,$zero,4
+beq $s0,$t0,exit				;i=4, goto Exit  38h
+add $zero,$zero,$zero
+add $zero,$zero,$zero
+add $zero,$zero,$zero
+
+add $t2,$t4,$s0 				;$t1 address of iden[j][0]
+lw $t0,0($t2)					;$t0=iden[j][0]h4c
+addi $t0,$t0,5					;$s0=iden[j][0]+5
+
+addi $t7, $zero, 9
+slt $t6, $t7, $t0
+beq $t6, $zero, exitmod
+add $zero,$zero,$zero
+add $zero,$zero,$zero
+add $zero,$zero,$zero
+addi $t0, $t0, -10
+exitmod:					
+sw $t0,12($t2)					; target
+
+addi $s0,$s0,1					;i++
+j forloop
+exit:
+lw $t0,12($t4)
+lw $t1,13($t4)
+lw $t2,14($t4)
+lw $t3,15($t4)
+sw $t0,13($t4)
+sw $t1,12($t4)
+sw $t2,15($t4)
+sw $t3,14($t4)
+
+
+addi $s4,$s4,1					;j++
+j ForLoop
+Exit:
