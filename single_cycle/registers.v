@@ -9,11 +9,15 @@ module registers(busA,busB,busW,Ra,Rb,Rw,RegWr,Clk);
   
   assign busA = (Ra==5'b0)? 32'b0:data[Ra];
   assign busB = (Rb==5'b0)? 32'b0:data[Rb];
-  always@(negedge Clk)
-  begin
-    if(RegWr)
-      begin
-        data[Rw] = busW;
-          end
-  end
-endmodule      
+  
+  always@(negedge Clk)
+  
+  begin
+  
+    if(RegWr)
+     begin
+        data[Rw] = busW;  
+      end
+  end
+endmodule
+      
